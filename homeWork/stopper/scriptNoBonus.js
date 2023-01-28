@@ -1,6 +1,7 @@
 let display = document.getElementById('stopperScreen');
 let startButton = document.getElementById('startStopper');
 let stopButton = document.getElementById('stopStopper');
+let resetButton = document.getElementById('resetStopper');
 let jobs = [];
 startButton.addEventListener('click',()=>{
     start();
@@ -8,6 +9,10 @@ startButton.addEventListener('click',()=>{
 stopButton.addEventListener('click',()=>{
     stop();
 });
+resetButton.addEventListener('click',()=>{
+    resetStopper();
+});
+
 function start() {
     let timeInterval = document.getElementById('stopperTimeInterval').value * 1000;
     if (display.value == undefined) {
@@ -25,6 +30,14 @@ function start() {
     }
 }
 function stop() {
+    jobs.forEach((job)=>{
+        clearTimeout(job);
+    });
+}
+function resetStopper() {
+    display.innerText = '';
+    display.value = undefined;
+    document.getElementById('stopper').reset();
     jobs.forEach((job)=>{
         clearTimeout(job);
     });
